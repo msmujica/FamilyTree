@@ -7,27 +7,41 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Node n1 = new Node(1);
-            Node n2 = new Node(2);
-            Node n3 = new Node(3);
-            Node n4 = new Node(4);
-            Node n5 = new Node(5);
-            Node n6 = new Node(6);
-            Node n7 = new Node(7);
+            
+            //Parte 2
+            Node<Person> Abuela = new Node<Person>(new Person("Abuela María", 90));
+            Node<Person> Abuelo = new Node<Person>(new Person("Abuelo José", 85));
+            Node<Person> Mama = new Node<Person>(new Person("Mamá Ana", 61));
+            Node<Person> Papa = new Node<Person>(new Person("Papá CarlosTercero", 55));
+            Node<Person> Hijo = new Node<Person>(new Person("Hijo Lucas", 20));
+            Node<Person> Hija = new Node<Person>(new Person("Hija Sofía", 18));
+            Node<Person> Tia = new Node<Person>(new Person("Tía Laura", 45));
 
-            n1.AddChildren(n2);
-            n1.AddChildren(n3);
+            Abuela.AddChildren(Papa);
+            Abuela.AddChildren(Tia);
+            
+            Abuelo.AddChildren(Mama);
 
-            n2.AddChildren(n4);
-            n2.AddChildren(n5);
+            Mama.AddChildren(Hijo);
+            Mama.AddChildren(Hija);
 
-            n3.AddChildren(n6);
-            n3.AddChildren(n7);
+            Papa.AddChildren(Hijo);
+            Papa.AddChildren(Hija);
 
-            // visitar el árbol aquí
-            SumVisitor visitor = new SumVisitor();
-            n1.Accept(visitor);
-            Console.WriteLine(visitor.Sum);
+            //Parte 3
+            SumVisitor visitorA = new SumVisitor(); 
+            Abuela.Accept(visitorA);
+
+            Console.WriteLine("La suma de las edades es: " + visitorA.Sum);
+            
+            //Parte 4
+            MaxAgeVisitor maxAgeVisitor = new MaxAgeVisitor();
+            Abuela.Accept(maxAgeVisitor);
+            Console.WriteLine("La edad del hijo más grande es: " + maxAgeVisitor.MaxAge);
+
+            LongerNameVisitor longerName = new LongerNameVisitor();
+            Abuela.Accept(longerName);
+            Console.WriteLine("El nombre mas largo del arbol genelogico es:" + longerName.LongestName);
         }
     }
 }
